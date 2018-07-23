@@ -5,14 +5,16 @@ interface Props{
     onStart:Function,
     settings:{
         width:number,
-        height:number
+        height:number,
+        speed:number,
     }
 
 }
 
 interface State{
     width:number,
-    height:number
+    height:number,
+    speed:number,
 }
 
 class StartScreen extends React.Component<Props,State>{
@@ -30,6 +32,11 @@ class StartScreen extends React.Component<Props,State>{
             height:value
         })
     }
+    handleChangeSpeed(value){
+        this.setState({
+            speed:value
+        })
+    }
 
     handleStart(){
         this.props.onStart(this.state)
@@ -43,7 +50,7 @@ class StartScreen extends React.Component<Props,State>{
                         <label htmlFor="">
                             Ширина:
                             <input
-                                type="text"
+                                type="number"
                                 value={this.state.width|| 0}
                                 onChange={(e)=>this.handleChangeWidth(parseInt(e.target.value))}
                             />
@@ -53,9 +60,20 @@ class StartScreen extends React.Component<Props,State>{
                         <label htmlFor="">
                             Высота:
                             <input
-                                type="text"
+                                type="number"
                                 value={this.state.height|| 0}
                                 onChange={(e)=>this.handleChangeHeight(parseInt(e.target.value))}
+                            />
+                        </label>
+                    </div>
+                    <div className="StartScreen__input-wrap">
+                        <label htmlFor="">
+                            Скорость:
+                            <input
+                                type="number"
+                                min={1}
+                                value={this.state.speed|| 0}
+                                onChange={(e)=>this.handleChangeSpeed(parseInt(e.target.value))}
                             />
                         </label>
                     </div>

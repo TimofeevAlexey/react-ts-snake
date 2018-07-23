@@ -3,7 +3,8 @@ import classNames from 'classnames'
 
 interface Props{
     colCount:number,
-    filterSnakeByRow?:number[][]
+    filterSnakeByRow?:number[][],
+    filteredApple?:number[]
 }
 
 class Row extends React.Component<Props,{}>{
@@ -16,11 +17,14 @@ class Row extends React.Component<Props,{}>{
                 f[1] === i
             );
 
+
+
             cols.push(
                 <td
                     key={i}
                     className={classNames({
-                        snake:filterSnakeByCol.length >0
+                        snake:filterSnakeByCol.length >0,
+                        apple:this.props.filteredApple.length >1 && this.props.filteredApple[1] ===i
                     })}
                 >
 

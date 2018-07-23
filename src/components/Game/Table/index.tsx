@@ -6,7 +6,8 @@ import './style.scss'
 interface Props{
     width:number,
     height:number,
-    snake:number[][]
+    snake:number[][],
+    apple?:number[]
 }
 
 
@@ -17,13 +18,20 @@ class Table extends React.Component<Props,{}>{
 
         for(let i =0 ; i< this.props.height; i++){
             let filterSnakeByRow = this.props.snake.filter((f)=>
-               f[0] == i
+               f[0] === i
             )
+            let filteredApple = [];
+
+            if(this.props.apple && this.props.apple.length>0){
+                filteredApple = this.props.apple[0] ===i ? this.props.apple : []
+            }
+
             rows.push(
                 <Row
                     key={i}
                     colCount={this.props.width}
                     filterSnakeByRow={filterSnakeByRow}
+                    filteredApple={filteredApple}
                 />
             )
         }
