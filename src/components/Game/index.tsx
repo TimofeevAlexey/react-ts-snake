@@ -8,7 +8,6 @@ import StartScreen from './StartScreen'
 import GameOverScreen from './GameOverScreen'
 import Table from './Table'
 
-
 interface Props{
 
 }
@@ -86,13 +85,11 @@ class Game extends React.Component<Props,State>{
                 break;
         }
     }
-
     handleStartNewGame(){
         if(!this.state.isStart){
             this.handleOnStart(this.state.settings)
         }
     }
-
     handleChangeDirectionUp(){
         this.funcChangeDirection({
             x:0,
@@ -129,10 +126,7 @@ class Game extends React.Component<Props,State>{
            this.funcNewApple()
            this.funcTimerStart()
         })
-
-
     }
-
 
     funcTimerStart(){
         clearInterval(timerId);
@@ -178,7 +172,6 @@ class Game extends React.Component<Props,State>{
             }
         }
 
-
         // если встретили яблоко , то добавляем элемент
         if(
             newSnake[headIndex][0] === this.state.apple[0]&&
@@ -198,16 +191,13 @@ class Game extends React.Component<Props,State>{
             }
         }
 
-
-
         if(this.state.settings.walls){
             //удар об стену
-
             if(
                 head[0] === -1
                 ||  head[1] === -1
-                ||  head[0] > this.state.settings.width-1
-                ||  head[1] > this.state.settings.height-1
+                ||  head[0] > this.state.settings.height-1
+                ||  head[1] > this.state.settings.width-1
             ){
               this.funcGameOver();
             }
@@ -248,20 +238,16 @@ class Game extends React.Component<Props,State>{
         this.setState({
             direction:direction
         },()=>{
-
-
             this.funcMove(()=>{
                 this.funcTimerStart()
             })
-
-
         })
     }
     funcNewApple(){
 
         let apple = [
-             random.int(0,this.state.settings.width-1),
-             random.int(0,this.state.settings.height-1)
+             random.int(0,this.state.settings.height-1),
+             random.int(0,this.state.settings.width-1)
         ]
 
         let isIncludeSnake = false;

@@ -17,8 +17,6 @@ class Row extends React.Component<Props,{}>{
                 f[1] === i
             );
 
-
-
             cols.push(
                 <td
                     key={i}

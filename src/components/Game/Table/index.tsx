@@ -12,10 +12,8 @@ interface Props{
     walls:boolean
 }
 
-
 class Table extends React.Component<Props,{}>{
     render(){
-
         let rows = [];
 
         for(let i =0 ; i< this.props.height; i++){
@@ -37,7 +35,6 @@ class Table extends React.Component<Props,{}>{
                 />
             )
         }
-
         return(
             <table className={
                 classNames({
@@ -46,7 +43,7 @@ class Table extends React.Component<Props,{}>{
                 })}
             >
                 <tbody>
-                {rows}
+                    {rows}
                 </tbody>
 
             </table>

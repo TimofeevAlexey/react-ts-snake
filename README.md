@@ -3,7 +3,7 @@
 ## Для запуска игры:
 
 ```
-npm init
+npm i
 npm start
 ```
 
