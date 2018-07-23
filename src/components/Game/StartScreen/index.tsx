@@ -47,39 +47,44 @@ class StartScreen extends React.Component<Props,State>{
             <div className="StartScreen">
                 <form action="" onSubmit={()=>this.handleStart()}>
                     <div className="StartScreen__input-wrap">
-                        <label htmlFor="">
+                        <label>
                             Ширина:
-                            <input
-                                type="number"
-                                value={this.state.width|| 0}
-                                onChange={(e)=>this.handleChangeWidth(parseInt(e.target.value))}
-                            />
                         </label>
+                        <input
+                            min={5}
+                            type="number"
+                            value={this.state.width|| 0}
+                            onChange={(e)=>this.handleChangeWidth(parseInt(e.target.value))}
+                        />
                     </div>
                     <div className="StartScreen__input-wrap">
-                        <label htmlFor="">
+                        <label>
                             Высота:
-                            <input
-                                type="number"
-                                value={this.state.height|| 0}
-                                onChange={(e)=>this.handleChangeHeight(parseInt(e.target.value))}
-                            />
                         </label>
+                        <input
+                            min={5}
+                            type="number"
+                            value={this.state.height|| 0}
+                            onChange={(e)=>this.handleChangeHeight(parseInt(e.target.value))}
+                        />
                     </div>
                     <div className="StartScreen__input-wrap">
-                        <label htmlFor="">
+                        <label>
                             Скорость:
-                            <input
-                                type="number"
-                                min={1}
-                                value={this.state.speed|| 0}
-                                onChange={(e)=>this.handleChangeSpeed(parseInt(e.target.value))}
-                            />
                         </label>
+                        <input
+                            type="number"
+                            min={1}
+                            value={this.state.speed|| 0}
+                            onChange={(e)=>this.handleChangeSpeed(parseInt(e.target.value))}
+                        />
                     </div>
-                    <button type="submit">
+                    <div className="btn-wrap">
+                        <button type="submit">
                         Старт
-                    </button>
+                         </button>
+                    </div>
+
                 </form>
 
             </div>

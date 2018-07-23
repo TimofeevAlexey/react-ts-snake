@@ -177,8 +177,10 @@ class Game extends React.Component<Props,State>{
             }
         }
 
-        //удар об стену
+
         let head = newSnake[newSnake.length-1];
+
+        //удар об стену
         if(
             head[0] === -1
             ||  head[1] === -1
@@ -186,6 +188,15 @@ class Game extends React.Component<Props,State>{
             ||  head[1] > this.state.settings.height-1
         ){
           this.funcGameOver();
+        }
+
+        //съел сам себя
+        let isSelfEat = newSnake.filter((f)=>
+            equal(f,head)
+        ).length > 1;
+
+        if(isSelfEat){
+            this.funcGameOver();
         }
 
         this.setState({
