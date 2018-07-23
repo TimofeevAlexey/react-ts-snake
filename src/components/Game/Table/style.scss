@@ -6,7 +6,9 @@
   border-collapse:collapse;
   border-spacing:0;
   background-image:none;
-
+  &.withBorder{
+    border:4px solid #000;
+  }
   tr{
     td{
       width:25px;

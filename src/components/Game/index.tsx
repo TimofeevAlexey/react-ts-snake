@@ -19,7 +19,8 @@ interface State{
     settings:{
         width:number,
         height:number,
-        speed:number
+        speed:number,
+        walls:boolean
     },
     snake:number[][]
     direction:{
@@ -27,7 +28,8 @@ interface State{
         y:number
     },
     apple?:number[],
-    score:number
+    score:number,
+
 }
 
 let timerId ;
@@ -51,11 +53,12 @@ class Game extends React.Component<Props,State>{
         settings:{
             width:10,
             height:10,
-            speed:5
+            speed:5,
+            walls:false
         },
         snake:defaultSnake,
         direction:defaultDirection,
-        score:defaultScore
+        score:defaultScore,
     };
 
     componentWillMount(){
@@ -158,6 +161,24 @@ class Game extends React.Component<Props,State>{
             newSnake[headIndex][1]+ this.state.direction.x,
         ]
 
+        let head = newSnake[newSnake.length-1];
+        if(!this.state.settings.walls){ // проход сквозь стены
+
+            if(head[1] > this.state.settings.width-1){
+                head[1] = 0
+            }
+            if(head[1] < 0){
+                head[1] = this.state.settings.width-1
+            }
+            if(head[0] > this.state.settings.height-1){
+                head[0] = 0
+            }
+            if(head[0] < 0){
+                head[0] = this.state.settings.height-1
+            }
+        }
+
+
         // если встретили яблоко , то добавляем элемент
         if(
             newSnake[headIndex][0] === this.state.apple[0]&&
@@ -178,16 +199,18 @@ class Game extends React.Component<Props,State>{
         }
 
 
-        let head = newSnake[newSnake.length-1];
 
-        //удар об стену
-        if(
-            head[0] === -1
-            ||  head[1] === -1
-            ||  head[0] > this.state.settings.width-1
-            ||  head[1] > this.state.settings.height-1
-        ){
-          this.funcGameOver();
+        if(this.state.settings.walls){
+            //удар об стену
+
+            if(
+                head[0] === -1
+                ||  head[1] === -1
+                ||  head[0] > this.state.settings.width-1
+                ||  head[1] > this.state.settings.height-1
+            ){
+              this.funcGameOver();
+            }
         }
 
         //съел сам себя
@@ -278,6 +301,7 @@ class Game extends React.Component<Props,State>{
                                 height={this.state.settings.height}
                                 snake={this.state.snake}
                                 apple={this.state.apple}
+                                walls={this.state.settings.walls}
                             />
                             <div>
                                 <h2>Очки: {this.state.score}</h2>

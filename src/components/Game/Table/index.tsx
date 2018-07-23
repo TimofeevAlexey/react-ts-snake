@@ -1,4 +1,5 @@
 import * as React from 'react'
+import classNames from 'classnames';
 
 import Row from './Row'
 import './style.scss'
@@ -7,7 +8,8 @@ interface Props{
     width:number,
     height:number,
     snake:number[][],
-    apple?:number[]
+    apple?:number[],
+    walls:boolean
 }
 
 
@@ -37,7 +39,12 @@ class Table extends React.Component<Props,{}>{
         }
 
         return(
-            <table className="Table">
+            <table className={
+                classNames({
+                    "Table":true,
+                    "withBorder":this.props.walls
+                })}
+            >
                 <tbody>
                 {rows}
                 </tbody>

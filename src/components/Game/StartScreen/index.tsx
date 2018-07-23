@@ -7,6 +7,7 @@ interface Props{
         width:number,
         height:number,
         speed:number,
+        walls:boolean
     }
 
 }
@@ -15,6 +16,7 @@ interface State{
     width:number,
     height:number,
     speed:number,
+    walls:boolean
 }
 
 class StartScreen extends React.Component<Props,State>{
@@ -40,6 +42,11 @@ class StartScreen extends React.Component<Props,State>{
 
     handleStart(){
         this.props.onStart(this.state)
+    }
+    handleToogleWalls(){
+        this.setState({
+            walls:!this.state.walls
+        })
     }
 
     render(){
@@ -77,6 +84,16 @@ class StartScreen extends React.Component<Props,State>{
                             min={1}
                             value={this.state.speed|| 0}
                             onChange={(e)=>this.handleChangeSpeed(parseInt(e.target.value))}
+                        />
+                    </div>
+                    <div className="StartScreen__input-wrap">
+                        <label>
+                            Стены:
+                        </label>
+                        <input
+                            type="checkbox"
+                            checked={this.state.walls}
+                            onChange={(e)=>this.handleToogleWalls()}
                         />
                     </div>
                     <div className="btn-wrap">
